@@ -7,9 +7,6 @@ module.exports = {
     node: true,
     jest: true,
   },
-  "plugins": [
-    "css-modules"
-  ],
   extends: ['react-app'],
   rules: {
     'max-len': ['error', 80, 2, {
