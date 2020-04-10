@@ -37,11 +37,10 @@
     "sinon": "^9.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build-microfrontend": "react-app-rewired build",
-    "test": "react-scripts test",
-    "test:coverage": "cross-env CI=TRUE react-scripts test --coverage",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "test:coverage": "cross-env CI=TRUE react-app-rewired test --coverage",
     "lint": "eslint src/**/*.js --fix"
   },
   "lint-staged": {
