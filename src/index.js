@@ -6,7 +6,7 @@ import './index.css';
 import App from 'hoc/App/App';
 import * as serviceWorker from './serviceWorker';
 import Home from './components/Home/Home';
-import ExternalComponentOne from './components/ExternalComponentOne/ExternalComponentOne';
+import MFFactory from './microfrontend/Factory/MicroFrontendFactory';
 
 const AppWrapper = ({ history }) => {
   return (
@@ -14,7 +14,16 @@ const AppWrapper = ({ history }) => {
       <App>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/test" component={ExternalComponentOne} />
+          <Route
+            exact
+            path="/test"
+            component={() => (
+              <MFFactory
+                host={process.env.REACT_APP_EXTERNAL_APP_1_HOST}
+                name={process.env.REACT_APP_EXTERNAL_APP_1_NAME}
+              />
+            )}
+          />
         </Switch>
       </App>
     </Router>
@@ -38,7 +47,7 @@ window.unmountMFContainer = containerId => {
 };
 
 // if not a MF
-if (!document.getElementById('MFContainer')) {
+if (!document.getElementById(process.env.REACT_APP_NAME)) {
   window.renderMFContainer('root', {
     history: createBrowserHistory(),
   });

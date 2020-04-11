@@ -4,7 +4,7 @@ export const attachScript = (id, host, onLoad, onError, async = true) => {
   script.crossOrigin = '';
   script.id = id;
   script.async = async;
-  script.src = host;
+  script.src = `${host}/bundle.js`;
   script.onload = onLoad;
   script.onerror = onError;
   document.head.appendChild(script);

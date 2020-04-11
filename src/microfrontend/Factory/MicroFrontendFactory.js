@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { attachScript, mountMicroFrontend, unmountMicroFrontend } from './util';
+import {
+  attachScript,
+  mountMicroFrontend,
+  unmountMicroFrontend,
+} from './MicroFrontendFactory.helpers';
 
 const MicroFrontendFactory = ({ name, host, config, onError }) => {
   const [loadingError, setLoadingError] = useState('');
