@@ -18,6 +18,7 @@ export const mountMicroFrontend = (name, config) => {
 };
 
 export const unmountMicroFrontend = name => {
+  console.log('poop');
   const unmountHandler = window[`unmount${name}`];
   unmountHandler
     ? unmountHandler(`${name}-container`)

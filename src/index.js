@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import './index.css';
 import App from 'hoc/App/App';
@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import Home from './components/Home/Home';
 import MFFactory from './microfrontend/Factory/MicroFrontendFactory';
 
-const AppWrapper = ({ history }) => {
+export const AppWrapper = ({ history }) => {
   return (
     <Router history={history}>
       <App>
@@ -30,8 +30,12 @@ const AppWrapper = ({ history }) => {
   );
 };
 
+const APP_NAME = process.env.REACT_APP_NAME;
+const render = `render${APP_NAME}`;
+const unmount = `unmount${APP_NAME}`;
+
 // render MF
-window.renderMFContainer = (containerId, props) => {
+window[render] = (containerId, props) => {
   ReactDOM.render(
     <React.StrictMode>
       <AppWrapper {...props} />
@@ -42,13 +46,14 @@ window.renderMFContainer = (containerId, props) => {
 };
 
 // unmount MF
-window.unmountMFContainer = containerId => {
+window[unmount] = containerId => {
   ReactDOM.unmountComponentAtNode(document.getElementById(containerId));
 };
 
 // if not a MF
+/* istanbul ignore next */
 if (!document.getElementById(process.env.REACT_APP_NAME)) {
-  window.renderMFContainer('root', {
+  window[render]('root', {
     history: createBrowserHistory(),
   });
 }
